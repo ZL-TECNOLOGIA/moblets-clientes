@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moblets | O seu motoboy particular</title>
+  <meta
+    name="description"
+    content="A Moblets resolve entregas do dia a dia com agilidade: documentos, chaves, encomendas e apoio sob demanda em Sorocaba e região.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #05070d;
+      --bg-soft: #0a0f1a;
+      --surface: rgba(255, 255, 255, 0.05);
+      --surface-strong: rgba(10, 16, 28, 0.92);
+      --border: rgba(173, 240, 255, 0.14);
+      --text: #f5fbff;
+      --muted: #99a9b8;
+      --primary: #33d6e9;
+      --primary-2: #3d72ff;
+      --primary-glow: rgba(51, 214, 233, 0.26);
+      --max-width: 1180px;
+      --radius: 28px;
+      --radius-md: 22px;
+      --radius-sm: 16px;
+      --shadow-lg: 0 28px 80px rgba(0, 0, 0, 0.34);
+      --shadow-md: 0 18px 45px rgba(0, 0, 0, 0.24);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", system-ui, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(61, 114, 255, 0.15), transparent 28%),
+        radial-gradient(circle at 82% 18%, rgba(51, 214, 233, 0.12), transparent 22%),
+        linear-gradient(180deg, #04060c 0%, #07101b 48%, #04070d 100%);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      background: transparent;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .page-shell {
+      position: relative;
+      isolation: isolate;
+    }
+
+    .page-shell::before,
+    .page-shell::after {
+      content: "";
+      position: fixed;
+      z-index: -2;
+      pointer-events: none;
+      width: min(26vw, 210px);
+      aspect-ratio: 1;
+      opacity: 0.18;
+      background: linear-gradient(135deg, rgba(51, 214, 233, 0.95), rgba(255, 255, 255, 0.08));
+      clip-path: polygon(0 0, 74% 0, 100% 50%, 74% 100%, 0 100%, 32% 50%);
+      filter: blur(0.4px);
+    }
+
+    .page-shell::before {
+      top: 88px;
+      left: -96px;
+    }
+
+    .page-shell::after {
+      right: -104px;
+      top: 52vh;
+      transform: rotate(180deg);
+    }
+
+    .container {
+      width: min(calc(100% - 2rem), var(--max-width));
+      margin: 0 auto;
+    }
+
+    .section {
+      padding: 4.5rem 0;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 2.5rem;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--primary), rgba(61, 114, 255, 0.6));
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 5vw, 3.65rem);
+      line-height: 0.98;
+      letter-spacing: -0.04em;
+      font-weight: 800;
+    }
+
+    .section-text {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-top: 1.15rem;
+      max-width: 62ch;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(22px);
+      background: rgba(5, 7, 13, 0.72);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .nav {
+      min-height: 4.7rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .brand img {
+      width: 124px;
+      height: auto;
+    }
+
+    .nav-links {
+      display: none;
+      align-items: center;
+      gap: 1.4rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.96rem;
+      font-weight: 600;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: var(--text);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .nav-download {
+      display: none;
+      white-space: nowrap;
+    }
+
+    .menu-toggle {
+      width: 2.85rem;
+      height: 2.85rem;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .menu-toggle svg {
+      width: 1.2rem;
+      height: 1.2rem;
+    }
+
+    .mobile-panel {
+      display: none;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(5, 7, 13, 0.92);
+    }
+
+    .mobile-panel.is-open {
+      display: block;
+    }
+
+    .mobile-panel-inner {
+      padding: 1rem 0 1.25rem;
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .mobile-link {
+      padding: 0.9rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .hero {
+      padding: 3.2rem 0 4.25rem;
+    }
+
+    .hero-grid {
+      display: block;
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.7rem 1rem;
+      margin-bottom: 1.2rem;
+      border-radius: 999px;
+      background: rgba(51, 214, 233, 0.08);
+      border: 1px solid rgba(51, 214, 233, 0.18);
+      color: #bbf7ff;
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
+    .hero-badge::before {
+      content: "";
+      width: 0.55rem;
+      height: 0.55rem;
+      border-radius: 999px;
+      background: var(--primary);
+      box-shadow: 0 0 0 0.35rem rgba(51, 214, 233, 0.12);
+    }
+
+    .hero-title {
+      font-size: clamp(2.8rem, 10vw, 5.5rem);
+      line-height: 0.95;
+      letter-spacing: -0.055em;
+      font-weight: 800;
+      max-width: 9.5ch;
+    }
+
+    .hero-title .accent {
+      background: linear-gradient(90deg, #ffffff 0%, #96f7ff 32%, #3d72ff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-text {
+      margin-top: 1.2rem;
+      color: var(--muted);
+      max-width: 52ch;
+      font-size: 1.05rem;
+    }
+
+    .store-cluster {
+      margin-top: 1.8rem;
+      display: grid;
+      gap: 0.9rem;
+      max-width: 620px;
+    }
+
+    .store-button {
+      min-height: 4.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.95rem;
+      padding: 1rem 1.15rem;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03)),
+        linear-gradient(135deg, rgba(51, 214, 233, 0.22), rgba(61, 114, 255, 0.18));
+      box-shadow: 0 16px 38px rgba(10, 16, 28, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .store-button:hover,
+    .store-button:focus-visible {
+      transform: translateY(-2px);
+      border-color: rgba(187, 247, 255, 0.34);
+      box-shadow: 0 22px 48px rgba(0, 0, 0, 0.34), 0 0 0 0.2rem rgba(51, 214, 233, 0.1);
+    }
+
+    .store-icon {
+      width: 2.9rem;
+      height: 2.9rem;
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      background: rgba(4, 7, 13, 0.45);
+      color: white;
+    }
+
+    .store-icon svg {
+      width: 1.5rem;
+      height: 1.5rem;
+      fill: currentColor;
+    }
+
+    .store-copy small {
+      display: block;
+      color: #cbe7f2;
+      font-size: 0.74rem;
+      line-height: 1.2;
+    }
+
+    .store-copy strong {
+      display: block;
+      margin-top: 0.15rem;
+      font-size: 1.05rem;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-note {
+      margin-top: 0.9rem;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .trust-strip {
+      padding: 1rem 0 0;
+    }
+
+    .trust-grid {
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .trust-card {
+      padding: 1.1rem 1rem;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .trust-card strong {
+      display: block;
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .trust-card p {
+      margin-top: 0.35rem;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .split {
+      display: grid;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .visual-panel {
+      position: relative;
+      padding: 1.15rem;
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+    }
+
+    .visual-panel::before {
+      content: "";
+      position: absolute;
+      inset: auto auto 1rem -3rem;
+      width: 8rem;
+      height: 8rem;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(61, 114, 255, 0.38), transparent 72%);
+      pointer-events: none;
+    }
+
+    .visual-panel img {
+      width: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 20px 42px rgba(0, 0, 0, 0.32));
+    }
+
+    .app-panel {
+      padding: 1.2rem 0 0;
+      text-align: center;
+      min-height: 460px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .app-panel img {
+      width: min(150%, 680px);
+      max-width: none;
+      height: auto;
+      margin: 0 auto -1.2rem;
+      transform: translateX(8%) scale(1.22);
+      transform-origin: center bottom;
+    }
+
+    .steps {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1.6rem;
+    }
+
+    .step-card {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.95rem;
+      padding: 1rem;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .step-index {
+      width: 2.7rem;
+      height: 2.7rem;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(51, 214, 233, 0.22), rgba(61, 114, 255, 0.18));
+      color: #dffcff;
+      font-weight: 800;
+    }
+
+    .step-card h3 {
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .step-card p {
+      margin-top: 0.3rem;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .services {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.015), rgba(255, 255, 255, 0));
+    }
+
+    .services-head {
+      max-width: 760px;
+    }
+
+    .services-grid {
+      display: grid;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .service-card {
+      position: relative;
+      padding: 1.3rem;
+      border-radius: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(8, 14, 24, 0.76);
+      overflow: hidden;
+    }
+
+    .service-card::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--primary-2));
+      opacity: 0.9;
+    }
+
+    .service-icon {
+      width: 3rem;
+      height: 3rem;
+      display: grid;
+      place-items: center;
+      margin-bottom: 1rem;
+      border-radius: 16px;
+      background: rgba(51, 214, 233, 0.1);
+      color: var(--primary);
+      font-size: 1.4rem;
+    }
+
+    .service-card h3 {
+      font-size: 1.12rem;
+      letter-spacing: -0.02em;
+    }
+
+    .service-card p {
+      margin-top: 0.45rem;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .app-points {
+      display: grid;
+      gap: 0.9rem;
+      margin-top: 1.5rem;
+    }
+
+    .app-point {
+      padding: 1rem 1rem 1rem 1.1rem;
+      border-left: 3px solid var(--primary);
+      border-radius: 0 18px 18px 0;
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .app-point strong {
+      display: block;
+      font-size: 0.98rem;
+      letter-spacing: -0.02em;
+    }
+
+    .app-point span {
+      display: block;
+      margin-top: 0.28rem;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .cta {
+      padding: 4.5rem 0 5rem;
+    }
+
+    .cta-shell {
+      position: relative;
+      padding: 1.5rem;
+      border-radius: 30px;
+      background:
+        radial-gradient(circle at top left, rgba(51, 214, 233, 0.18), transparent 30%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03)),
+        #08111d;
+      border: 1px solid rgba(187, 247, 255, 0.16);
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+    }
+
+    .cta-shell::after {
+      content: "";
+      position: absolute;
+      top: -1.7rem;
+      right: -2.2rem;
+      width: 10rem;
+      aspect-ratio: 1;
+      opacity: 0.35;
+      background: linear-gradient(135deg, rgba(51, 214, 233, 0.95), rgba(255, 255, 255, 0.08));
+      clip-path: polygon(0 0, 74% 0, 100% 50%, 74% 100%, 0 100%, 32% 50%);
+    }
+
+    .cta-layout {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .footer {
+      padding: 0 0 2.5rem;
+    }
+
+    .footer-shell {
+      padding: 1.4rem 1.2rem;
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+      display: grid;
+      gap: 1.2rem;
+    }
+
+    .footer-brand {
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .footer-brand img {
+      width: 132px;
+    }
+
+    .footer-brand p {
+      color: var(--muted);
+      font-size: 0.92rem;
+      max-width: 42ch;
+    }
+
+    .footer-links,
+    .footer-social {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+
+    .social-link {
+      width: 2.9rem;
+      height: 2.9rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .social-link:hover,
+    .social-link:focus-visible {
+      transform: translateY(-2px);
+      border-color: rgba(187, 247, 255, 0.25);
+      background: rgba(51, 214, 233, 0.12);
+    }
+
+    .social-link svg {
+      width: 1.25rem;
+      height: 1.25rem;
+      fill: currentColor;
+    }
+
+    .footer-meta {
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    @media (min-width: 680px) {
+      .store-cluster {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .trust-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .services-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .footer-shell {
+        grid-template-columns: 1.3fr auto auto;
+        align-items: end;
+      }
+    }
+
+    @media (min-width: 920px) {
+      .section {
+        padding: 6rem 0;
+      }
+
+      .nav-links {
+        display: flex;
+      }
+
+      .nav-download {
+        display: inline-flex;
+      }
+
+      .menu-toggle,
+      .mobile-panel {
+        display: none !important;
+      }
+
+      .hero {
+        padding: 4.5rem 0 5.3rem;
+      }
+
+      .split,
+      .cta-layout {
+        grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      }
+
+      .services-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .app-panel {
+        min-height: 620px;
+      }
+
+      .app-panel img {
+        width: min(165%, 820px);
+        transform: translateX(10%) scale(1.28);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <div class="container nav">
+        <a class="brand" href="#top" aria-label="Moblets">
+          <img src="dist/images/logo.svg" alt="Logo Moblets">
+        </a>
+
+        <nav aria-label="Principal">
+          <ul class="nav-links">
+            <li><a href="#como-funciona">Como funciona</a></li>
+            <li><a href="#servicos">Serviços</a></li>
+            <li><a href="#app">O app</a></li>
+            <li><a href="#contato">Contato</a></li>
+          </ul>
+        </nav>
+
+        <div class="nav-actions">
+          <a class="store-button nav-download" href="#baixar" aria-label="Baixar o aplicativo Moblets">
+            <span class="store-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+              </svg>
+            </span>
+            <span class="store-copy">
+              <small>Baixar o app</small>
+              <strong>Disponível nas lojas</strong>
+            </span>
+          </a>
+          <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mobilePanel" aria-label="Abrir menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 7h16M4 12h16M4 17h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="mobile-panel" id="mobilePanel">
+        <div class="container mobile-panel-inner">
+          <a class="mobile-link" href="#como-funciona">Como funciona</a>
+          <a class="mobile-link" href="#servicos">Serviços</a>
+          <a class="mobile-link" href="#app">O app</a>
+          <a class="mobile-link" href="#contato">Contato</a>
+          <div class="store-cluster">
+            <a class="store-button" href="#baixar">
+              <span class="store-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                </svg>
+              </span>
+              <span class="store-copy">
+                <small>Baixar na</small>
+                <strong>App Store</strong>
+              </span>
+            </a>
+            <a class="store-button" href="#baixar">
+              <span class="store-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M3.18 23.76c.3.17.64.24.99.19l12.6-7.27-2.72-2.72-10.87 9.8zm15.4-9.23L5.83 7.3 3.17.29c-.05.1-.09.2-.09.31v22.8c0 .1.04.21.1.31l2.65-7.01 12.75 7.34zm2.1-3.8L17.85 9.2l-2.1 2.1 2.1 2.1 2.83-1.67c.74-.43.74-1.57 0-2zm-17.5-7.5L3.18.23c-.35-.05-.69.02-.99.19l10.87 9.8 2.72-2.72-12.6-7.27z" />
+                </svg>
+              </span>
+              <span class="store-copy">
+                <small>Baixar no</small>
+                <strong>Google Play</strong>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <div class="hero-badge">Disponível agora em Sorocaba e região</div>
+            <h1 class="hero-title">O seu motoboy <span class="accent">particular.</span></h1>
+            <p class="hero-text">
+              Esqueceu algo? A Moblets busca pra você. Entregas de documentos, chaves, encomendas pessoais e apoio sob
+              demanda com a agilidade do seu delivery favorito.
+            </p>
+
+            <div class="store-cluster" id="baixar">
+              <a class="store-button" href="#" aria-label="Baixar Moblets na App Store">
+                <span class="store-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                  </svg>
+                </span>
+                <span class="store-copy">
+                  <small>Baixar na</small>
+                  <strong>App Store</strong>
+                </span>
+              </a>
+
+              <a class="store-button" href="#" aria-label="Baixar Moblets no Google Play">
+                <span class="store-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M3.18 23.76c.3.17.64.24.99.19l12.6-7.27-2.72-2.72-10.87 9.8zm15.4-9.23L5.83 7.3 3.17.29c-.05.1-.09.2-.09.31v22.8c0 .1.04.21.1.31l2.65-7.01 12.75 7.34zm2.1-3.8L17.85 9.2l-2.1 2.1 2.1 2.1 2.83-1.67c.74-.43.74-1.57 0-2zm-17.5-7.5L3.18.23c-.35-.05-.69.02-.99.19l10.87 9.8 2.72-2.72-12.6-7.27z" />
+                  </svg>
+                </span>
+                <span class="store-copy">
+                  <small>Baixar no</small>
+                  <strong>Google Play</strong>
+                </span>
+              </a>
+            </div>
+
+            <p class="hero-note">Baixe o app gratuitamente e peça seu motoboy particular quando precisar.</p>
+          </div>
+        </div>
+
+        <div class="container trust-strip">
+          <div class="trust-grid">
+            <article class="trust-card">
+              <strong>Agilidade para o dia a dia</strong>
+              <p>Uma solução simples para imprevistos, urgências e pequenas demandas pessoais.</p>
+            </article>
+            <article class="trust-card">
+              <strong>Entrega com praticidade</strong>
+              <p>Do pedido ao acompanhamento, a experiência foi organizada para ser intuitiva no celular.</p>
+            </article>
+            <article class="trust-card">
+              <strong>Visual inspirado no site antigo</strong>
+              <p>Reaproveitamos o clima premium, escuro e tecnológico com acentos ciano e azul.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="como-funciona">
+        <div class="container split">
+          <div>
+            <span class="eyebrow">Como funciona</span>
+            <h2 class="section-title">Rápido de entender. Fácil de usar.</h2>
+            <p class="section-text">
+              A experiência foi simplificada para o cliente saber exatamente o que fazer em cada etapa, com leitura
+              rápida e menos fricção no mobile.
+            </p>
+
+            <div class="steps">
+              <article class="step-card">
+                <div class="step-index">01</div>
+                <div>
+                  <h3>Abra o app e faça sua solicitação</h3>
+                  <p>Informe o que precisa buscar ou entregar de forma clara e objetiva.</p>
+                </div>
+              </article>
+
+              <article class="step-card">
+                <div class="step-index">02</div>
+                <div>
+                  <h3>Confirme os detalhes da corrida</h3>
+                  <p>Organize retirada e destino com um fluxo simples e direto.</p>
+                </div>
+              </article>
+
+              <article class="step-card">
+                <div class="step-index">03</div>
+                <div>
+                  <h3>Acompanhe tudo pelo celular</h3>
+                  <p>Tenha mais clareza e segurança durante a solicitação e a entrega.</p>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <div class="visual-panel">
+            <img src="dist/images/imagecliente.png" alt="Cliente usando o aplicativo Moblets">
+          </div>
+        </div>
+      </section>
+
+      <section class="section services" id="servicos">
+        <div class="container">
+          <div class="services-head">
+            <span class="eyebrow">Serviços</span>
+            <h2 class="section-title">Facilitamos o seu dia a dia.</h2>
+            <p class="section-text">
+              Mantivemos a essência do conteúdo original e reorganizamos as informações para ficarem mais escaneáveis,
+              mais elegantes e muito mais fáceis de consumir no mobile.
+            </p>
+          </div>
+
+          <div class="services-grid">
+            <article class="service-card">
+              <div class="service-icon" aria-hidden="true">✓</div>
+              <h3>Encomendas e presentes</h3>
+              <p>Esqueceu algo ou precisa enviar um item? Nós entregamos com agilidade para facilitar sua rotina.</p>
+            </article>
+
+            <article class="service-card">
+              <div class="service-icon" aria-hidden="true">⌁</div>
+              <h3>Chaves e pequenos itens</h3>
+              <p>Buscas rápidas para momentos em que praticidade e tempo fazem toda a diferença.</p>
+            </article>
+
+            <article class="service-card">
+              <div class="service-icon" aria-hidden="true">▣</div>
+              <h3>Documentos e negócios</h3>
+              <p>Envie documentos e materiais com uma apresentação mais profissional e uma experiência clara para o cliente.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="app">
+        <div class="container split">
+          <div>
+            <span class="eyebrow">O app</span>
+            <h2 class="section-title">Logística de elite na palma da sua mão.</h2>
+            <p class="section-text">
+              Acompanhe uma experiência mais clara, elegante e prática para o cliente pedir, entender e confiar no
+              serviço desde o primeiro toque.
+            </p>
+
+            <div class="app-points">
+              <div class="app-point">
+                <strong>Leitura mais confortável</strong>
+                <span>Tipografia moderna, contraste melhor e escalas mais equilibradas para telas pequenas.</span>
+              </div>
+              <div class="app-point">
+                <strong>Toques mais fáceis</strong>
+                <span>Botões maiores, áreas clicáveis generosas e espaçamento pensado para o polegar.</span>
+              </div>
+              <div class="app-point">
+                <strong>Jornada mais objetiva</strong>
+                <span>Informações organizadas em blocos curtos, com hierarquia visual clara e direta.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="visual-panel app-panel">
+            <img src="dist/images/iphone-na-mao.png" alt="iPhone com a interface do aplicativo Moblets em destaque">
+          </div>
+        </div>
+      </section>
+
+      <section class="cta" aria-labelledby="cta-title">
+        <div class="container">
+          <div class="cta-shell">
+            <div class="cta-layout">
+              <div>
+                <span class="eyebrow">Comece agora</span>
+                <h2 class="section-title" id="cta-title">Leve a Moblets no seu bolso.</h2>
+                <p class="section-text">
+                  Os botões das lojas aparecem novamente em destaque para reforçar a conversão no final da página e
+                  encurtar o caminho até o download.
+                </p>
+              </div>
+
+              <div class="store-cluster">
+                <a class="store-button" href="#" aria-label="Baixar Moblets na App Store">
+                  <span class="store-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                      <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                    </svg>
+                  </span>
+                  <span class="store-copy">
+                    <small>Baixar na</small>
+                    <strong>App Store</strong>
+                  </span>
+                </a>
+
+                <a class="store-button" href="#" aria-label="Baixar Moblets no Google Play">
+                  <span class="store-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                      <path d="M3.18 23.76c.3.17.64.24.99.19l12.6-7.27-2.72-2.72-10.87 9.8zm15.4-9.23L5.83 7.3 3.17.29c-.05.1-.09.2-.09.31v22.8c0 .1.04.21.1.31l2.65-7.01 12.75 7.34zm2.1-3.8L17.85 9.2l-2.1 2.1 2.1 2.1 2.83-1.67c.74-.43.74-1.57 0-2zm-17.5-7.5L3.18.23c-.35-.05-.69.02-.99.19l10.87 9.8 2.72-2.72-12.6-7.27z" />
+                    </svg>
+                  </span>
+                  <span class="store-copy">
+                    <small>Baixar no</small>
+                    <strong>Google Play</strong>
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer" id="contato">
+      <div class="container">
+        <div class="footer-shell">
+          <div class="footer-brand">
+            <img src="dist/images/logo.svg" alt="Moblets">
+            <p>A Moblets conecta praticidade, agilidade e uma experiência mais clara para quem precisa resolver o dia a dia com rapidez.</p>
+            <div class="footer-meta">© 2026 Moblets. Todos os direitos reservados.</div>
+          </div>
+
+          <div class="footer-links">
+            <a href="#">Privacidade</a>
+            <a href="#">Termos</a>
+            <a href="#">Contato</a>
+          </div>
+
+          <div class="footer-social" aria-label="Redes sociais">
+            <a class="social-link" href="https://www.instagram.com/" target="_blank" rel="noreferrer" aria-label="Instagram da Moblets">
+              <svg viewBox="0 0 24 24">
+                <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2.2A2.8 2.8 0 0 0 4.2 7v10A2.8 2.8 0 0 0 7 19.8h10a2.8 2.8 0 0 0 2.8-2.8V7A2.8 2.8 0 0 0 17 4.2H7zm10.55 1.65a.8.8 0 1 1 0 1.6.8.8 0 0 1 0-1.6zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2.2A2.8 2.8 0 1 0 12 14.8 2.8 2.8 0 0 0 12 9.2z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const mobilePanel = document.getElementById("mobilePanel");
+
+    if (menuToggle && mobilePanel) {
+      menuToggle.addEventListener("click", () => {
+        const isOpen = mobilePanel.classList.toggle("is-open");
+        menuToggle.setAttribute("aria-expanded", String(isOpen));
+      });
+
+      mobilePanel.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          mobilePanel.classList.remove("is-open");
+          menuToggle.setAttribute("aria-expanded", "false");
+        });
+      });
+    }
+  </script>
+</body>
+</html>
