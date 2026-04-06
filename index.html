@@ -192,7 +192,7 @@
       }
 
       .brand img {
-        width: 124px;
+        width: 130px;
         height: auto;
         filter: none;
       }
@@ -366,7 +366,7 @@
         line-height: 0.95;
         letter-spacing: -0.055em;
         font-weight: 800;
-        max-width: 9.5ch;
+        max-width: 8.5ch;
       }
 
       .hero-title .accent {
@@ -459,6 +459,11 @@
         width: 1.5rem;
         height: 1.5rem;
         fill: currentColor;
+      }
+
+      .store-icon-play svg {
+        width: 1.8rem;
+        height: 1.32rem;
       }
 
       .store-copy small {
@@ -563,46 +568,147 @@
         margin: 0 auto;
       }
 
+      .how-it-works {
+        position: relative;
+      }
+
+      .how-copy {
+        max-width: 640px;
+      }
+
+      .section-lead {
+        margin-top: 1rem;
+        max-width: 58ch;
+        color: rgba(245, 251, 255, 0.78);
+        font-size: 1rem;
+      }
+
+      .steps-highlights {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.7rem;
+        margin-top: 1.4rem;
+      }
+
+      .steps-highlights span {
+        display: inline-flex;
+        align-items: center;
+        min-height: 2.5rem;
+        padding: 0.65rem 0.95rem;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(255, 255, 255, 0.04);
+        color: rgba(245, 251, 255, 0.82);
+        font-size: 0.88rem;
+        font-weight: 600;
+      }
+
       .steps {
         display: grid;
-        gap: 1rem;
+        gap: 0.9rem;
         margin-top: 1.6rem;
       }
 
       .step-card {
+        position: relative;
         display: grid;
         grid-template-columns: auto 1fr;
-        gap: 0.95rem;
-        padding: 1rem;
-        border-radius: 18px;
+        gap: 1rem;
+        align-items: start;
+        padding: 1.2rem;
+        border-radius: 22px;
         border: 1px solid rgba(255, 255, 255, 0.08);
-        background: rgba(255, 255, 255, 0.035);
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.06),
+          rgba(255, 255, 255, 0.025)
+        );
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+      }
+
+      .step-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: linear-gradient(
+          90deg,
+          rgba(51, 214, 233, 0.06),
+          transparent 36%
+        );
+        pointer-events: none;
       }
 
       .step-index {
-        width: 2.7rem;
-        height: 2.7rem;
+        width: 3rem;
+        height: 3rem;
         display: grid;
         place-items: center;
-        border-radius: 14px;
+        border-radius: 16px;
         background: linear-gradient(
           135deg,
           rgba(51, 214, 233, 0.22),
           rgba(61, 114, 255, 0.18)
         );
+        border: 1px solid rgba(173, 240, 255, 0.14);
         color: #dffcff;
+        font-size: 0.94rem;
         font-weight: 800;
       }
 
+      .step-copy {
+        position: relative;
+        z-index: 1;
+      }
+
+      .step-label {
+        display: inline-block;
+        margin-bottom: 0.3rem;
+        color: var(--primary);
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
       .step-card h3 {
-        font-size: 1rem;
+        font-size: 1.06rem;
+        line-height: 1.2;
         letter-spacing: -0.02em;
       }
 
       .step-card p {
-        margin-top: 0.3rem;
+        margin-top: 0.45rem;
         color: var(--muted);
-        font-size: 0.92rem;
+        font-size: 0.94rem;
+      }
+
+      .how-panel {
+        padding: 1.4rem;
+      }
+
+      .how-panel img {
+        border-radius: 22px;
+      }
+
+      .how-panel-note {
+        display: grid;
+        gap: 0.35rem;
+        margin-top: 1rem;
+        padding: 1rem 1.05rem;
+        border-radius: 20px;
+        background: rgba(6, 12, 20, 0.86);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .how-panel-note strong {
+        font-size: 0.98rem;
+        letter-spacing: -0.02em;
+      }
+
+      .how-panel-note p {
+        color: var(--muted);
+        font-size: 0.9rem;
       }
 
       .services {
@@ -981,7 +1087,7 @@
       <header class="site-header">
         <div class="container nav">
           <a class="brand" href="#top" aria-label="Moblets">
-            <img src="dist/images/logo.svg" alt="Logo Moblets" />
+            <img src="dist/images/8.png" alt="Logo Moblets" />
           </a>
 
           <nav aria-label="Principal">
@@ -1037,12 +1143,13 @@
             <div class="hero-copy">
               <div class="hero-badge">Disponível na sua cidade</div>
               <h1 class="hero-title">
-                O seu motoboy <span class="accent">particular.</span>
+                Conecte-se a um <span class="accent">entregador</span> parceiro.
               </h1>
               <p class="hero-text">
-                Esqueceu algo? A Moblets busca pra você. Entregas de documentos,
-                chaves, encomendas pessoais e apoio sob demanda com a agilidade
-                do seu delivery favorito.
+                Esqueceu algo? Localize um entregador parceiro através da nossa
+                tecnologia. Envio de documentos, chaves e encomendas pessoais
+                com a agilidade que você já conhece. A Moblets intermedia sua
+                necessidade com o parceiro mais próximo.
               </p>
 
               <div class="store-cluster" id="baixar">
@@ -1073,10 +1180,17 @@
                   rel="noreferrer"
                   aria-label="Baixar Moblets no Google Play"
                 >
-                  <span class="store-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24">
+                  <span class="store-icon store-icon-play" aria-hidden="true">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="bi bi-google-play"
+                      viewBox="0 0 16 16"
+                    >
                       <path
-                        d="M3.18 23.76c.3.17.64.24.99.19l12.6-7.27-2.72-2.72-10.87 9.8zm15.4-9.23L5.83 7.3 3.17.29c-.05.1-.09.2-.09.31v22.8c0 .1.04.21.1.31l2.65-7.01 12.75 7.34zm2.1-3.8L17.85 9.2l-2.1 2.1 2.1 2.1 2.83-1.67c.74-.43.74-1.57 0-2zm-17.5-7.5L3.18.23c-.35-.05-.69.02-.99.19l10.87 9.8 2.72-2.72-12.6-7.27z"
+                        d="M14.222 9.374c1.037-.61 1.037-2.137 0-2.748L11.528 5.04 8.32 8l3.207 2.96zm-3.595 2.116L7.583 8.68 1.03 14.73c.201 1.029 1.36 1.61 2.303 1.055zM1 13.396V2.603L6.846 8zM1.03 1.27l6.553 6.05 3.044-2.81L3.333.215C2.39-.341 1.231.24 1.03 1.27"
                       />
                     </svg>
                   </span>
@@ -1121,56 +1235,67 @@
           </div> -->
         </section>
 
-        <section class="section" id="como-funciona">
+        <section class="section how-it-works" id="como-funciona">
           <div class="container split">
-            <div>
+            <div class="how-copy">
               <span class="eyebrow">Como funciona</span>
               <h2 class="section-title">Rápido de entender. Fácil de usar.</h2>
-              <p class="section-text">
-                A experiência foi simplificada para o cliente saber exatamente o
-                que fazer em cada etapa, com leitura rápida e menos fricção no
-                mobile.
-              </p>
 
+              <!-- <div class="steps-highlights" aria-label="Destaques do processo">
+                <span>Pedido em poucos toques</span>
+                <span>Valores claros antes de confirmar</span>
+                <span>Acompanhamento em tempo real</span>
+              </div> -->
               <div class="steps">
                 <article class="step-card">
                   <div class="step-index">01</div>
-                  <div>
-                    <h3>Abra o app e faça sua solicitação</h3>
+                  <div class="step-copy">
+                    <span class="step-label">Primeiro passo</span>
+                    <h3>Solicite via plataforma</h3>
                     <p>
-                      Informe o que precisa buscar ou entregar de forma clara e
-                      objetiva.
+                      Informe o ponto de retirada e destino para que o sistema
+                      localize um entregador parceiro disponível.
                     </p>
                   </div>
                 </article>
 
                 <article class="step-card">
                   <div class="step-index">02</div>
-                  <div>
-                    <h3>Confirme os detalhes da corrida</h3>
+                  <div class="step-copy">
+                    <span class="step-label">Confirmação</span>
+                    <h3>Verifique os detalhes</h3>
                     <p>
-                      Organize retirada e destino com um fluxo simples e direto.
+                      Confira os valores da intermediação e os dados do
+                      profissional que aceitou sua solicitação.
                     </p>
                   </div>
                 </article>
 
                 <article class="step-card">
                   <div class="step-index">03</div>
-                  <div>
-                    <h3>Acompanhe tudo pelo celular</h3>
+                  <div class="step-copy">
+                    <span class="step-label">Acompanhamento</span>
+                    <h3>Acompanhe em tempo real</h3>
                     <p>
-                      Tenha mais clareza e segurança durante a solicitação e a
-                      entrega.
+                      Utilize nossa tecnologia para monitorar o trajeto do
+                      entregador até a conclusão do serviço.
                     </p>
                   </div>
                 </article>
               </div>
             </div>
-            <div class="visual-panel">
+            <div class="visual-panel how-panel">
               <img
-                src="dist/images/imagecliente.png"
+                src="dist/images/7.png"
                 alt="Cliente usando o aplicativo Moblets."
               />
+              <div class="how-panel-note">
+                <strong>Experiência simples do começo ao fim</strong>
+                <p>
+                  Visualize as informações importantes de forma objetiva e tenha
+                  mais segurança em cada etapa da solicitação.
+                </p>
+              </div>
             </div>
           </div>
         </section>
@@ -1196,12 +1321,10 @@
                 <div class="service-content">
                   <h3>Encomendas e presentes</h3>
                   <p>
-                    Vendeu algo no desapego ou quer enviar um mimo? Nós
-                    entregamos com rapidez e segurança.
+                    Vendeu algo ou quer enviar um mimo? Encontre um entregador
+                    parceiro disponível para realizar o transporte com
+                    agilidade.
                   </p>
-                </div>
-                <div class="service-foot">
-                  Ideal para itens leves, mimos e envios do cotidiano.
                 </div>
               </article>
 
@@ -1213,12 +1336,9 @@
                 <div class="service-content">
                   <h3>Chaves e esquecimentos</h3>
                   <p>
-                    Busque o que ficou para trás sem precisar sair de casa ou do
-                    trabalho.
+                    Resolva imprevistos conectando-se a um profissional para
+                    buscar o que ficou para trás.
                   </p>
-                </div>
-                <div class="service-foot">
-                  Perfeito para resolver imprevistos com mais agilidade.
                 </div>
               </article>
 
@@ -1230,12 +1350,9 @@
                 <div class="service-content">
                   <h3>Documentos e negócios</h3>
                   <p>
-                    Envio seguro e profissional para protocolos e urgências
-                    comerciais.
+                    Intermediação segura para protocolos e urgências comerciais
+                    entre sua empresa e entregadores parceiros.
                   </p>
-                </div>
-                <div class="service-foot">
-                  Mais confiança para rotinas administrativas e comerciais.
                 </div>
               </article>
             </div>
@@ -1246,13 +1363,13 @@
           <div class="container split">
             <div>
               <span class="eyebrow">O app</span>
-              <h2 class="section-title">
-                Logística de elite na palma da sua mão.
-              </h2>
+              <h2 class="section-title">Acompanhe sua entrega</h2>
               <p class="section-text">
-                Acompanhe sua entrega em tempo real com transparência total de
-                valores e suporte humano para qualquer imprevisto. Tecnologia e
-                confiança para o seu dia a dia.
+                <strong>Tecnologia de elite para sua logística pessoal:</strong>
+                Tenha transparência total de valores e acompanhe o deslocamento
+                do entregador parceiro em tempo real. A Moblets oferece a
+                ferramenta ideal para facilitar a comunicação e a segurança
+                entre você e o profissional contratado.
               </p>
 
               <!-- <div class="app-points">
@@ -1282,7 +1399,7 @@
 
             <div class="visual-panel app-panel">
               <img
-                src="dist/images/Designer.png"
+                src="dist/images/app-moblets.png"
                 alt="iPhone com a interface do aplicativo Moblets em destaque"
               />
             </div>
@@ -1299,8 +1416,8 @@
                     Leve a <span class="mob">Moblets</span> no seu bolso.
                   </h2>
                   <p class="section-text">
-                    Clique abaixo para baixar o app e solicitar seu motoboy
-                    particular agora.
+                    Leve a Moblets no seu bolso. Clique abaixo para baixar o app
+                    e conectar-se a um entregador parceiro agora mesmo.
                   </p>
                 </div>
 
@@ -1332,10 +1449,17 @@
                     rel="noreferrer"
                     aria-label="Baixar Moblets no Google Play"
                   >
-                    <span class="store-icon" aria-hidden="true">
-                      <svg viewBox="0 0 24 24">
+                    <span class="store-icon store-icon-play" aria-hidden="true">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        class="bi bi-google-play"
+                        viewBox="0 0 16 16"
+                      >
                         <path
-                          d="M3.18 23.76c.3.17.64.24.99.19l12.6-7.27-2.72-2.72-10.87 9.8zm15.4-9.23L5.83 7.3 3.17.29c-.05.1-.09.2-.09.31v22.8c0 .1.04.21.1.31l2.65-7.01 12.75 7.34zm2.1-3.8L17.85 9.2l-2.1 2.1 2.1 2.1 2.83-1.67c.74-.43.74-1.57 0-2zm-17.5-7.5L3.18.23c-.35-.05-.69.02-.99.19l10.87 9.8 2.72-2.72-12.6-7.27z"
+                          d="M14.222 9.374c1.037-.61 1.037-2.137 0-2.748L11.528 5.04 8.32 8l3.207 2.96zm-3.595 2.116L7.583 8.68 1.03 14.73c.201 1.029 1.36 1.61 2.303 1.055zM1 13.396V2.603L6.846 8zM1.03 1.27l6.553 6.05 3.044-2.81L3.333.215C2.39-.341 1.231.24 1.03 1.27"
                         />
                       </svg>
                     </span>
